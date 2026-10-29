@@ -3,14 +3,241 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rise and Shine</title>
+<title>Rise and Shine: Sunrise Alarm for iPhone</title>
+<meta name="description" content="An iPhone alarm that moves with sunrise every day, inside the hours you choose. Free on the App Store.">
+<meta name="apple-itunes-app" content="app-id=6821180122">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d0f24">
+<link rel="canonical" href="https://lorencouse.github.io/rise-and-shine-site/">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="img/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rise and Shine">
+<meta property="og:title" content="Rise and Shine: Sunrise Alarm">
+<meta property="og:description" content="An iPhone alarm that moves with sunrise every day, inside the hours you choose. Free on the App Store.">
+<meta property="og:url" content="https://lorencouse.github.io/rise-and-shine-site/">
+<meta property="og:image" content="https://lorencouse.github.io/rise-and-shine-site/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rise and Shine: an alarm that follows the sun">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css">
+<script src="sun.js" defer></script>
+<script src="home.js" defer></script>
 </head>
 <body>
-<main>
-<h1>Rise and Shine</h1>
-<p class="lede">An alarm clock that follows the sun. Wake at sunrise, dawn or first light, wherever you are.</p>
-<p><a href="support.html">Support</a> · <a href="privacy.html">Privacy Policy</a></p>
+<header>
+  <a class="wordmark" href="#top">Rise and Shine</a>
+  <nav aria-label="Site">
+    <a class="nav-opt" href="#faq">Questions</a>
+    <a class="only-wide" href="support.html">Support</a>
+    <a class="only-wide" href="privacy.html">Privacy</a>
+    <a class="btn" href="https://apps.apple.com/app/id6821180122">Get the app</a>
+  </nav>
+</header>
+
+<main id="top">
+<div class="hero">
+  <h1><span class="a rise">An alarm that</span><span class="b rise" style="--i:1">follows the sun</span></h1>
+
+  <div class="reel rise" style="--i:2">
+    <div class="sliver" aria-hidden="true"><span data-f="prevday">Thu 29 Oct</span><span data-f="prevtime">7:02 AM</span></div>
+    <!-- the app's own Next alarm card; without script it shows San Francisco on 30 October -->
+    <article class="card morning" data-ui>
+      <div class="pager">
+        <button type="button" class="needs-js" data-step="-1" aria-label="Previous morning" disabled>‹</button>
+        <span class="when" data-f="label">Next alarm</span>
+        <button type="button" class="needs-js" data-step="1" aria-label="Next morning">›</button>
+      </div>
+      <div class="row" style="margin-top:6px">
+        <label class="select"><span class="sr">City</span>
+          <select class="chip" id="city"><option>San Francisco</option></select>
+        </label>
+        <button type="button" class="chip needs-js" id="here">Use my location</button>
+      </div>
+      <p class="clock" aria-live="polite"><span data-f="time">7:03</span><small data-f="ampm">AM</small></p>
+      <p class="when"><b data-f="day">Fri 30 Oct</b> · <span data-f="sun">sunrise 7:33</span></p>
+      <p class="window-note" data-f="note">Inside your window, 5:30 to 8:00.</p>
+      <div class="seg needs-js" role="group" aria-label="Wake with">
+        <button type="button" data-anchor="firstLight" aria-pressed="false">First light</button>
+        <button type="button" data-anchor="dawn" aria-pressed="false">Dawn</button>
+        <button type="button" data-anchor="sunrise" aria-pressed="true">Sunrise</button>
+      </div>
+      <div class="offset">
+        <span data-f="offset">30 min before sunrise</span>
+        <span class="stepper needs-js">
+          <button type="button" data-off="-5" aria-label="Five minutes earlier">−</button>
+          <button type="button" data-off="5" aria-label="Five minutes later">+</button>
+        </span>
+      </div>
+    </article>
+    <div class="sliver next" aria-hidden="true"><span data-f="nextday">Sat 31 Oct</span><span data-f="nexttime">7:04 AM</span></div>
+  </div>
+
+  <div class="below">
+    <p class="lede rise" style="--i:3">Rise and Shine moves your iPhone alarm with sunrise every day, and never past the hours you set.</p>
+    <div class="actions rise" style="--i:4">
+      <a class="btn" href="https://apps.apple.com/app/id6821180122">Get it free on the App Store</a>
+      <small>iPhone and Apple Watch, iOS 26 or later</small>
+    </div>
+  </div>
+</div>
+
+<section class="pick wrap" aria-labelledby="pick-h">
+  <h2 class="sec-h rise" id="pick-h">Pick your light</h2>
+  <div class="light-list" role="radiogroup" aria-labelledby="pick-h">
+    <div class="light rise">
+      <img class="light-pic" src="img/first-light.jpg" width="1280" height="719" alt="Deep blue sky before dawn, a thin orange band along the horizon" loading="lazy">
+      <span class="light-word">Sun 18° below the horizon</span>
+      <label class="card light-row" data-ui>
+        <input type="radio" name="anchor" value="firstLight">
+        <span><b>First light</b><span>The first trace of light, about 90 minutes before sunrise.</span></span>
+        <span class="t" data-t="firstLight">6:04</span>
+      </label>
+    </div>
+    <div class="light rise" style="--i:1">
+      <img class="light-pic" src="img/dawn.jpg" width="1280" height="853" alt="Hills in silhouette under an amber dawn sky" loading="lazy">
+      <span class="light-word">Sun 6° below the horizon</span>
+      <label class="card light-row" data-ui>
+        <input type="radio" name="anchor" value="dawn">
+        <span><b>Dawn</b><span>Light enough to see outside, 25 to 35 minutes before sunrise.</span></span>
+        <span class="t" data-t="dawn">7:06</span>
+      </label>
+    </div>
+    <div class="light rise" style="--i:2">
+      <img class="light-pic" src="img/sunrise.jpg" width="1280" height="952" alt="The sun clearing a ridge above a still lake" loading="lazy">
+      <span class="light-word">Sun on the horizon</span>
+      <label class="card light-row" data-ui>
+        <input type="radio" name="anchor" value="sunrise" checked>
+        <span><b>Sunrise</b><span>When the sun breaks the horizon.</span></span>
+        <span class="t" data-t="sunrise">7:33</span>
+      </label>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-labelledby="alarm-h">
+  <h2 class="sec-h rise" id="alarm-h">Built like an alarm</h2>
+  <div class="cells">
+    <div class="cell rise">
+      <div class="txt"><h3>Rings through Silent and Focus</h3><p>A full-screen alarm on the Lock Screen, in the Dynamic Island and on your Apple Watch, even if the app is closed.</p></div>
+      <div class="alert" data-ui>
+        <div class="top"><span>Rise and Shine</span><span>Alarm</span></div>
+        <p class="big" data-f2="alarm">7:03</p>
+        <p class="when" data-f2="rule">30 min before sunrise</p>
+        <div class="btns"><span>Snooze</span><span>Stop</span></div>
+      </div>
+    </div>
+    <div class="cell rise" style="--i:1">
+      <div class="txt"><h3>A window it never leaves</h3><p>Midsummer dawns and midwinter mornings stay sensible: the alarm holds at the edge of the hours you choose.</p></div>
+      <div class="frag kv" data-ui>
+        <div><span>No earlier than</span>5:30 AM</div>
+        <div><span>No later than</span>8:00 AM</div>
+        <div><span>Weekends</span>30 min after sunrise</div>
+      </div>
+    </div>
+    <div class="cell rise" style="--i:2">
+      <div class="txt"><h3>Your night, worked back</h3><p>Bedtime and wind-down reminders count back from tomorrow's alarm and your sleep goal.</p></div>
+      <div class="frag" data-ui>
+        <div class="dots"><i style="left:0"></i><i style="left:50%"></i><i style="left:100%"></i></div>
+        <div class="tonight">
+          <span>Wind down<b data-f2="wind">10:33</b>PM</span>
+          <span>Bedtime<b data-f2="bed">11:03</b>PM</span>
+          <span>Alarm<b data-f2="alarm2">7:03</b>AM</span>
+        </div>
+      </div>
+    </div>
+    <div class="cell rise">
+      <div class="txt"><h3>See the whole year</h3><p>Your alarm drawn against the sun for twelve months, inside your wake window.</p></div>
+      <div class="frag year" data-ui>
+        <svg id="year" viewBox="0 0 320 170" role="img" aria-label="This year's sunrise and alarm times for the chosen city"></svg>
+        <div class="legend"><span><i style="background:#fff"></i>Alarm</span><span><i style="background:var(--sunrise)"></i>Sunrise</span><span><i style="background:var(--moon)"></i>Wake window</span></div>
+      </div>
+    </div>
+    <div class="cell rise" style="--i:1">
+      <div class="txt"><h3>It travels with you</h3><p>Turn on travel updates and the alarm moves to the local sunrise when you change time zones, without opening the app.</p></div>
+      <div class="frag kv" data-ui>
+        <div><span style="color:var(--ink)">Update alarms when I travel</span><i class="toggle" aria-hidden="true"></i></div>
+        <div><span>Location</span>Follows this iPhone</div>
+      </div>
+    </div>
+    <div class="cell rise" style="--i:2">
+      <div class="txt"><h3>Nothing leaves your phone</h3><p>Sunrise is worked out on the device. No account, no ads, no tracking.</p></div>
+      <div class="frag kv" data-ui>
+        <div><span>Location</span>Stays on this iPhone</div>
+        <div><span>Health, optional</span>Read only</div>
+        <div><span>Calendar, optional</span>Its own calendar</div>
+        <div><span>Our servers</span>None</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seasons" aria-labelledby="year-h">
+  <div class="fields">
+    <div class="field rise">
+      <h2 id="year-h">One alarm, all year</h2>
+      <div class="mini" data-ui><p class="d" data-s="0d">20 March</p><p class="c" data-s="0c">6:42<small> AM</small></p><p class="s" data-s="0s">Sunrise 7:12</p></div>
+      <p class="clause" data-s="0t">In March it rings at 6:42.</p>
+    </div>
+    <div class="field rise" style="--i:1">
+      <div class="mini" data-ui><p class="d" data-s="1d">21 June</p><p class="c" data-s="1c">5:30<small> AM</small></p><p class="s" data-s="1s">Sunrise 5:48</p></div>
+      <p class="clause" data-s="1t">In June the window holds it at 5:30.</p>
+    </div>
+    <div class="field rise" style="--i:2">
+      <div class="mini" data-ui><p class="d" data-s="2d">22 September</p><p class="c" data-s="2c">6:27<small> AM</small></p><p class="s" data-s="2s">Sunrise 6:57</p></div>
+      <p class="clause" data-s="2t">By September, 6:27.</p>
+    </div>
+    <div class="field rise" style="--i:3">
+      <div class="mini" data-ui><p class="d" data-s="3d">21 December</p><p class="c" data-s="3c">6:51<small> AM</small></p><p class="s" data-s="3s">Sunrise 7:21</p></div>
+      <p class="clause" data-s="3t">And in December, 6:51.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="faq" aria-labelledby="faq-h">
+  <div class="faq-grid">
+    <h2 class="sec-h rise" id="faq-h">Questions</h2>
+    <div>
+      <div class="faq-list">
+        <details name="faq" class="rise" open><summary>The time changes every day. Is that right?<i class="pm" aria-hidden="true"></i></summary><p>Yes. It follows the sun, so it moves a little each day as sunrise does. To keep it inside a range, set a wake window under Wake time.</p></details>
+        <details name="faq" class="rise" style="--i:1"><summary>Will it ring in Silent mode?<i class="pm" aria-hidden="true"></i></summary><p>Yes. Alarms ring through Silent mode and Focus, just like the Clock app.</p></details>
+        <details name="faq" class="rise" style="--i:2"><summary>What happens when I travel?<i class="pm" aria-hidden="true"></i></summary><p>If your location follows your device, the alarm updates each time you open the app. Turn on Update alarms when I travel, and allow Always location access, to have it move without opening the app.</p></details>
+        <details name="faq" class="rise" style="--i:3"><summary>What if there is no sunrise?<i class="pm" aria-hidden="true"></i></summary><p>In polar day or night, the alarm rings at the latest time in your wake window.</p></details>
+        <details name="faq" class="rise" style="--i:4"><summary>Can it show my sleep?<i class="pm" aria-hidden="true"></i></summary><p>Turn on Health in Settings and allow Sleep access. Last night's sleep then appears on the Home screen. The app only reads; it never writes to Health.</p></details>
+        <details name="faq" class="rise" style="--i:5"><summary>What does it cost?<i class="pm" aria-hidden="true"></i></summary><p>Nothing. It is free, with no ads and no in-app purchases. It needs iOS 26 or later.</p></details>
+      </div>
+      <p class="faq-more rise">More answers on the <a href="support.html">support page</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="close" aria-labelledby="close-h">
+  <div class="close-pic">
+    <video autoplay muted loop playsinline preload="metadata" poster="img/timelapse.jpg" width="854" height="480" aria-hidden="true"><source src="img/timelapse.webm" type="video/webm"></video>
+  </div>
+  <div class="close-text">
+    <h2 id="close-h" class="rise">Set it once</h2>
+    <p class="rise" style="--i:1">From tomorrow, your alarm keeps time with the light outside. Free for iPhone, with Apple Watch.</p>
+    <a class="btn rise" style="--i:2" href="https://apps.apple.com/app/id6821180122">Get it free on the App Store</a>
+  </div>
+</section>
 </main>
+
+<footer>
+  <div class="tile statement">
+    <p class="lg">Rise and Shine works out sunrise on your phone and nowhere else.</p>
+    <p class="sm">Photographs via Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Astronomical_twilight_in_Bromo.jpg">"Astronomical twilight in Bromo"</a> by Nugroho Adie, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Rh%C3%B6nblick_vom_Noppen_bei_Keulos_in_die_Morgend%C3%A4mmerung.jpg">"Rhönblick vom Noppen bei Keulos in die Morgendämmerung"</a> by GerritR, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Sunrise_over_Sukhna.jpg">"Sunrise over Sukhna"</a> by Unpetitprole, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Sunrise_Timelapse_(30174294051).webm">"Sunrise Timelapse"</a> by Shenandoah National Park, public domain.</p>
+  </div>
+  <div class="tile nav"><h2>Pages</h2>
+    <ul><li><a href="support.html">Support</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="https://apps.apple.com/app/id6821180122">App Store</a></li></ul></div>
+  <div class="tile sky" data-sky hidden><h2>Tomorrow's sunrise in <span data-sky="city">San Francisco</span></h2><p class="big" data-sky="next">7:33 AM</p></div>
+  <div class="tile mail"><h2>Help and bugs</h2><a href="mailto:cousethemouse@gmail.com">cousethemouse@gmail.com</a></div>
+  <div class="tile mark" aria-hidden="true"><p>Rise and Shine</p></div>
+  <a class="tile go" href="https://apps.apple.com/app/id6821180122">Get it free
+    <svg width="56" height="32" viewBox="0 0 56 32" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16h46M36 3l14 13-14 13"/></svg></a>
+</footer>
 </body>
 </html>
