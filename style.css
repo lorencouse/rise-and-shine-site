@@ -1,31 +1,103 @@
+/* Shared by every page: the app's night palette (dark only, like the app), type, header and footer. */
 :root {
-  --bg: #fbf7f2;
-  --text: #1d1b2b;
-  --muted: #5c5870;
-  --accent: #c2562b;
+  color-scheme: dark;
+  --bg: #0d0f24;        /* the app's Theme.night */
+  --s1: #171a33;
+  --s2: #23264a;
+  --ink: #f5f6fb;
+  --soft: #b8bad0;
+  --sun: #ffd673;       /* Theme.sun: the accent, kept for the action and links */
+  --sun-hi: #ffe39b;
+  --sunrise: #fa9e3d;
+  --moon: #9eb3fa;
+  --sans: -apple-system, BlinkMacSystemFont, system-ui, "Helvetica Neue", sans-serif;
+  --round: ui-rounded, "SF Pro Rounded", var(--sans);
+  --m: 16px;
+  /* five steps: small, body, sub, display, clock */
+  --t-small: 15px; --t-body: 18px; --t-sub: 26px;
+  --t-display: clamp(38px, 9.4vw, 64px);
+  --t-clock: clamp(84px, 24vw, 160px);
+  --ease: cubic-bezier(.2,.7,.2,1);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d0f24;
-    --text: #f1eee8;
-    --muted: #a9a5bd;
-    --accent: #ffc56f;
-  }
-}
+@media (min-width: 768px) { :root { --m: 32px; } }
 * { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t-body)/1.5 var(--sans); }
+a { color: inherit; }
+img, video { display: block; max-width: 100%; }
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.025em; line-height: 1.02; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border-radius: 999px; background: var(--sun); color: var(--bg); font: 600 var(--t-body)/1 var(--sans); text-decoration: none; transition: transform .15s var(--ease), background .15s; }
+.btn:hover { background: var(--sun-hi); }
+.btn:active { transform: scale(.97); }
+.wrap { padding-inline: var(--m); }
+
+/* header: wordmark, a few links, one action */
+header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px var(--m); }
+.wordmark { font: 600 var(--t-body)/1 var(--round); text-decoration: none; white-space: nowrap; padding: 12px 0; }
+header nav { display: flex; align-items: center; gap: 20px; font-size: var(--t-small); }
+header nav a:not(.btn) { text-decoration: none; color: var(--soft); padding: 12px 0; white-space: nowrap; }
+header nav a:not(.btn):hover, header nav a[aria-current] { color: var(--ink); }
+header .btn { min-height: 44px; padding: 0 16px; font-size: var(--t-small); white-space: nowrap; }
+.only-wide { display: none; }
+@media (max-width: 399px) { header nav { gap: 16px; } header nav .nav-opt { display: none; } }
+@media (min-width: 768px) { .only-wide { display: inline; } }
+@media (min-width: 1100px) { header { padding-block: 20px; } }
+
+/* footer of tiles */
+footer { padding: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.tile { background: var(--s1); border-radius: 18px; padding: 20px; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+.tile[hidden] { display: none; }
+.tile.mark { grid-column: 1 / -1; order: 2; min-height: 160px; background: var(--ink); color: var(--bg); justify-content: center; align-items: center; }
+.tile.mark p { font: 600 clamp(44px, 11vw, 136px)/1 var(--round); letter-spacing: -0.04em; text-align: center; }
+.tile.go { grid-column: 1 / -1; order: 1; background: var(--sun); color: var(--bg); text-decoration: none; font-size: var(--t-sub); font-weight: 600; letter-spacing: -0.02em; transition: background .15s; }
+.tile.go:hover { background: var(--sun-hi); }
+.tile.go svg { align-self: flex-end; transition: transform .2s var(--ease); }
+.tile.go:hover svg { transform: translateX(6px); }
+.tile h2 { font-size: var(--t-small); font-weight: 600; letter-spacing: 0; line-height: 1.3; color: var(--soft); }
+.tile ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: var(--t-body); }
+.tile ul a { text-decoration: none; display: inline-block; padding: 6px 0; }
+.tile ul a:hover { color: var(--sun); }
+.tile .lg { font-size: var(--t-body); line-height: 1.35; }
+.tile .sm { font-size: var(--t-small); color: var(--soft); line-height: 1.45; }
+.tile .sm a:hover { color: var(--ink); }
+.tile .big { font: 300 var(--t-sub)/1.1 var(--round); }
+.tile.statement { grid-column: 1 / -1; }
+.tile.mail { grid-column: 1 / -1; }
+.tile.mail a { font-size: var(--t-small); word-break: break-all; }
+.tile.mail a:hover { color: var(--sun); }
+@media (min-width: 768px) {
+  footer { grid-template-columns: repeat(12, 1fr); gap: 8px; padding: 8px; }
+  .tile.statement { grid-column: 1 / -1; min-height: 0; }
+  .tile.nav { grid-column: span 4; }
+  .tile.sky { grid-column: span 3; }
+  .tile.mail { grid-column: span 5; }
+  .tile.mark { grid-column: span 8; order: 0; min-height: 320px; }
+  .tile.go { grid-column: span 4; order: 0; min-height: 320px; }
+  /* without the sky tile (no script) the help tile takes its place */
+  footer:has(.tile.sky[hidden]) .tile.mail { grid-column: span 8; }
 }
-main { max-width: 680px; margin: 0 auto; padding: 48px 16px 72px; }
-h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 8px; }
-h2 { font-size: 1.3rem; margin: 40px 0 8px; }
-h3 { font-size: 1.05rem; margin: 24px 0 4px; }
-p, li { margin: 0 0 12px; }
-a { color: var(--accent); }
-.eyebrow { text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; margin-bottom: 16px; }
-.eyebrow a { text-decoration: none; }
-.meta { color: var(--muted); font-size: .9rem; }
-.lede { font-size: 1.15rem; }
+@media (min-width: 1100px) {
+  .tile.statement { grid-column: span 4; min-height: 220px; }
+  .tile.nav { grid-column: span 3; }
+  .tile.sky { grid-column: span 2; }
+  .tile.mail { grid-column: span 3; }
+  footer:has(.tile.sky[hidden]) .tile.mail { grid-column: span 5; }
+}
+
+/* document pages (Support, Privacy, 404): one 680px reading column */
+.doc { max-width: 680px; margin: 0 auto; padding: 48px 16px 120px; }
+.doc h1 { font-size: var(--t-display); margin-bottom: 20px; }
+.doc h2 { font-size: var(--t-sub); letter-spacing: -0.02em; line-height: 1.15; margin: 64px 0 16px; }
+.doc h3 { font-size: 22px; letter-spacing: -0.015em; line-height: 1.25; margin: 40px 0 10px; }
+.doc p, .doc li { margin: 0 0 14px; }
+.doc ul { padding-left: 1.2em; margin: 0 0 14px; }
+.doc a:not(.btn) { color: var(--sun); text-underline-offset: 3px; }
+.doc a:not(.btn):hover { color: var(--sun-hi); }
+.doc .meta { color: var(--soft); font-size: var(--t-small); margin-bottom: 20px; }
+.doc .lede { font-size: 22px; line-height: 1.45; }
+.doc .actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 32px; }
+.doc .actions a:not(.btn) { color: var(--ink); }
+@media (min-width: 768px) { .doc { padding-top: 80px; } }
